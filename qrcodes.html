@@ -12,49 +12,43 @@
 
     body {
       font-family: "Inter", sans-serif;
-      background: #f5f3ee;
+      background: #f4f1eb;
       color: #1c2636;
-      padding: 36px 24px 60px;
+      padding: 36px 20px 60px;
       min-height: 100vh;
     }
 
-    /* ── Top header banner ── */
+    /* ── Page header ── */
     .page-header {
-      max-width: 940px;
-      margin: 0 auto 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
+      max-width: 960px;
+      margin: 0 auto 20px;
     }
     .page-title {
       font-family: "Playfair Display", serif;
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       font-weight: 700;
       color: #1c2636;
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .page-title span { font-size: 1.6rem; }
 
-    /* ── Config card ── */
+    /* ── Config bar ── */
     .config-bar {
-      max-width: 940px;
-      margin: 0 auto 36px;
+      max-width: 960px;
+      margin: 0 auto 32px;
       background: #ffffff;
-      border-radius: 16px;
-      padding: 24px 28px;
+      border-radius: 14px;
+      padding: 20px 24px;
       display: flex;
-      gap: 12px;
+      gap: 10px;
       align-items: center;
       flex-wrap: wrap;
-      border: 1px solid #e0ddd6;
-      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+      border: 1px solid #e3dfd7;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
     }
     .config-label {
-      font-size: 0.72rem;
+      font-size: 0.71rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -64,109 +58,97 @@
     .url-input {
       flex: 1;
       min-width: 220px;
-      padding: 10px 16px;
-      border-radius: 10px;
+      padding: 9px 14px;
+      border-radius: 8px;
       border: 1.5px solid #dddad4;
-      background: #faf9f6;
+      background: #faf8f4;
       color: #1c2636;
-      font-family: "Inter", monospace;
-      font-size: 0.87rem;
+      font-size: 0.86rem;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
     .url-input:focus {
       border-color: #d4a017;
-      box-shadow: 0 0 0 3px rgba(212,160,23,0.12);
+      box-shadow: 0 0 0 3px rgba(212,160,23,0.13);
     }
     .url-input::placeholder { color: #bbb8b0; }
 
     .btn-generate {
-      padding: 10px 22px;
-      border-radius: 10px;
+      padding: 9px 20px;
+      border-radius: 8px;
       border: none;
-      background: linear-gradient(135deg, #e8b820 0%, #4aab38 100%);
+      background: linear-gradient(135deg, #d4a017 0%, #3d9c2c 100%);
       color: #fff;
       font-weight: 700;
-      font-size: 0.84rem;
+      font-size: 0.83rem;
       cursor: pointer;
-      transition: opacity 0.18s, transform 0.15s;
       letter-spacing: 0.02em;
-      box-shadow: 0 2px 10px rgba(74,171,56,0.22);
+      box-shadow: 0 2px 8px rgba(61,156,44,0.22);
+      transition: opacity 0.18s, transform 0.15s;
     }
     .btn-generate:hover { opacity: 0.88; transform: translateY(-1px); }
 
     .btn-print {
-      padding: 10px 20px;
-      border-radius: 10px;
+      padding: 9px 18px;
+      border-radius: 8px;
       border: 1.5px solid #dddad4;
       background: #ffffff;
       color: #6b7280;
       font-weight: 600;
-      font-size: 0.84rem;
+      font-size: 0.83rem;
       cursor: pointer;
-      transition: background 0.18s, color 0.18s, border-color 0.18s;
+      transition: background 0.18s, color 0.18s;
     }
-    .btn-print:hover { background: #f5f3ee; color: #1c2636; border-color: #c8c5be; }
+    .btn-print:hover { background: #f4f1eb; color: #1c2636; }
 
     .status-pill {
       font-size: 0.71rem;
-      padding: 5px 14px;
+      padding: 4px 14px;
       border-radius: 100px;
       background: #e8f5e4;
       border: 1px solid #a8d9a0;
       color: #2d7a22;
       display: none;
       font-weight: 600;
-      letter-spacing: 0.04em;
     }
     .status-pill.show { display: inline-block; }
 
-    /* ── QR Grid ── */
+    /* ── Grid ── */
     .grid {
-      max-width: 940px;
+      max-width: 960px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 18px;
+      gap: 16px;
     }
 
-    /* ── Individual QR card ── */
+    /* ── QR card ── */
     .qr-card {
       background: #ffffff;
-      border-radius: 18px;
-      padding: 26px 18px 22px;
+      border-radius: 16px;
+      padding: 24px 16px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 10px;
-      border: 1px solid #e8e5df;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border: 1px solid #e3dfd7;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       transition: transform 0.2s, box-shadow 0.2s;
       position: relative;
       overflow: hidden;
     }
-    .qr-card:hover { transform: translateY(-3px); box-shadow: 0 6px 22px rgba(0,0,0,0.09); }
+    .qr-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.09); }
 
-    /* gold-to-green top stripe */
+    /* top stripe */
     .qr-card::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 4px;
-      background: linear-gradient(90deg, #e8b820 0%, #4aab38 100%);
+      background: linear-gradient(90deg, #d4a017 0%, #3d9c2c 100%);
     }
 
-    /* subtle warm tint at bottom */
-    .qr-card::after {
-      content: "";
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 40px;
-      background: linear-gradient(to top, #fdf9f0, transparent);
-      pointer-events: none;
-    }
-
-    .qr-flower { font-size: 1.6rem; line-height: 1; margin-top: 4px; }
+    .qr-flower { font-size: 1.5rem; margin-top: 2px; }
 
     .qr-name {
       font-family: "Playfair Display", serif;
@@ -180,37 +162,24 @@
     .qr-full-name {
       font-size: 0.67rem;
       color: #9aa0ab;
-      font-weight: 400;
       text-align: center;
       letter-spacing: 0.02em;
     }
 
-    .qr-nick-badge {
-      font-size: 0.63rem;
-      padding: 3px 10px;
-      border-radius: 100px;
-      background: #fdf3d0;
-      border: 1px solid #e8c84a;
-      color: #a07010;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      display: none;
-    }
-    .qr-nick-badge.show { display: inline-block; }
-
+    /* QR code wrapper — white background so code is always scannable */
     .qr-box {
-      width: 148px;
-      height: 148px;
+      width: 152px;
+      height: 152px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #fafaf8;
+      background: #ffffff;
       border-radius: 12px;
-      border: 1px solid #e8e5df;
-      padding: 8px;
+      border: 1.5px solid #e3dfd7;
+      padding: 10px;
       margin-top: 4px;
     }
-    .qr-box canvas, .qr-box img { border-radius: 6px; display: block; }
+    .qr-box canvas, .qr-box img { display: block; border-radius: 4px; }
 
     .qr-placeholder {
       width: 132px; height: 132px;
@@ -220,11 +189,11 @@
     }
 
     .qr-url-label {
-      font-size: 0.54rem;
+      font-size: 0.53rem;
       color: #c0bdb6;
       text-align: center;
       word-break: break-all;
-      max-width: 170px;
+      max-width: 175px;
       line-height: 1.5;
       font-family: monospace;
     }
@@ -234,23 +203,27 @@
       body { background: #fff; padding: 8mm; }
       .config-bar, .page-header { display: none !important; }
       .grid { max-width: 100%; grid-template-columns: repeat(4, 1fr); gap: 8mm; }
-      .qr-card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; padding: 14px 12px; gap: 8px; }
+      .qr-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        break-inside: avoid;
+        padding: 12px 10px 14px;
+        gap: 8px;
+        border-radius: 10px;
+      }
       .qr-card:hover { transform: none; }
-      .qr-card::after { display: none; }
-      .qr-box { width: 132px; height: 132px; }
+      .qr-box { width: 134px; height: 134px; border: 1px solid #e0e0e0; }
       .qr-url-label { display: none; }
-      @page { margin: 12mm; }
+      @page { margin: 12mm; size: A4; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <div class="page-header">
-    <div class="page-title"><span>🌼</span> Enkutatash 2019 — QR Code Sheet</div>
+    <div class="page-title">🌼 &nbsp;Enkutatash 2019 — QR Code Sheet</div>
   </div>
 
-  <!-- Config bar -->
   <div class="config-bar" id="config-bar">
     <span class="config-label">Site URL</span>
     <input
@@ -258,26 +231,24 @@
       id="base-url"
       type="url"
       placeholder="https://your-app.vercel.app"
-      value=""
     />
-    <button class="btn-generate" onclick="generateAll()">⚡ Generate QR Codes</button>
+    <button class="btn-generate" id="btn-gen" onclick="generateAll()">⚡ Generate QR Codes</button>
     <button class="btn-print" onclick="window.print()">🖨 Print Sheet</button>
     <span class="status-pill" id="status-pill">✓ All 8 generated!</span>
   </div>
 
-  <!-- QR grid -->
   <div class="grid" id="qr-grid"></div>
 
   <script>
-    const GUESTS = [
-      { display: "Selam",     urlName: "Selam",     fullName: "Selam Meseret",   nick: null },
-      { display: "Biruk",     urlName: "Biruk",     fullName: "Biruk Meseret",   nick: null },
-      { display: "Momi",      urlName: "Momi",      fullName: "Bezaye Meseret",  nick: "Bezaye" },
-      { display: "Gashaye",   urlName: "Gashaye",   fullName: "Gashaye Nuresa",  nick: null },
-      { display: "Babi",      urlName: "Babi",      fullName: "Mintesnot Tadesse", nick: "Mintesnot" },
-      { display: "Ayate Aba", urlName: "Ayate Aba", fullName: "Meseret Adnew",   nick: "Meseret" },
-      { display: "Ayate Ama", urlName: "Ayate Ama", fullName: "Birhane Agaze",   nick: "Birhane" },
-      { display: "Nardos",    urlName: "Nardos",    fullName: "Nardos Asfeha",   nick: null },
+    var GUESTS = [
+      { display: "Selam",     urlName: "Selam",     fullName: "Selam Meseret" },
+      { display: "Biruk",     urlName: "Biruk",     fullName: "Biruk Meseret" },
+      { display: "Momi",      urlName: "Momi",      fullName: "Bezaye Meseret" },
+      { display: "Gashaye",   urlName: "Gashaye",   fullName: "Gashaye Nuresa" },
+      { display: "Babi",      urlName: "Babi",      fullName: "Mintesnot Tadesse" },
+      { display: "Ayate Aba", urlName: "Ayate Aba", fullName: "Meseret Adnew" },
+      { display: "Ayate Ama", urlName: "Ayate Ama", fullName: "Birhane Agaze" },
+      { display: "Nardos",    urlName: "Nardos",    fullName: "Nardos Asfeha" },
     ];
 
     function buildGrid() {
@@ -289,9 +260,7 @@
         card.innerHTML =
           '<div class="qr-flower">🌼</div>' +
           '<div class="qr-name">' + g.display + '</div>' +
-          (g.nick
-            ? '<span class="qr-nick-badge show">' + g.fullName.split(" ")[0] + '</span>'
-            : '<span class="qr-full-name">' + g.fullName + '</span>') +
+          '<div class="qr-full-name">' + g.fullName + '</div>' +
           '<div class="qr-box" id="qr-box-' + i + '">' +
             '<div class="qr-placeholder">Paste your<br/>Vercel URL<br/>above ↑</div>' +
           '</div>' +
@@ -302,22 +271,25 @@
 
     function generateAll() {
       var raw = document.getElementById("base-url").value.trim();
-      if (!raw) { alert("Please paste your Vercel URL first!"); return; }
+      if (!raw) { alert("Paste your Vercel URL first!"); return; }
       raw = raw.replace(/\/+$/, "");
 
       GUESTS.forEach(function(g, i) {
-        var fullUrl = raw + "/?name=" + encodeURIComponent(g.urlName);
+        var url = raw + "/?name=" + encodeURIComponent(g.urlName);
         var box = document.getElementById("qr-box-" + i);
         box.innerHTML = "";
+
+        /* QR rendered with dark modules on WHITE — always scannable */
         new QRCode(box, {
-          text: fullUrl,
-          width: 132,
-          height: 132,
-          colorDark: "#1a2540",
-          colorLight: "#ffffff",
+          text:         url,
+          width:        132,
+          height:       132,
+          colorDark:    "#1a2540",   /* dark navy modules */
+          colorLight:   "#ffffff",   /* white background  */
           correctLevel: QRCode.CorrectLevel.H
         });
-        document.getElementById("qr-url-" + i).textContent = fullUrl;
+
+        document.getElementById("qr-url-" + i).textContent = url;
       });
 
       var pill = document.getElementById("status-pill");
