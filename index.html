@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Melkam Addis Amet 2019 | Ethiopian New Year</title>
+  <meta name="description" content="A personal digital Enkutatash greeting for Ethiopian New Year 2019 — wishing health, peace, and prosperity." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0a0f1e; --slate-dark: #0d1530; --yellow: #f5c518;
+      --yellow-soft: #f0d060; --green-light: #6fcf5a; --green-dark: #1e5c2a;
+      --white-border: rgba(255,255,255,0.14); --white-text: rgba(255,255,255,0.88);
+      --text-muted: rgba(255,255,255,0.5); --radius: 28px;
+    }
+    html, body { height: 100%; width: 100%; overflow-x: hidden; }
+    body {
+      font-family: "Inter", sans-serif; background: var(--navy); color: var(--white-text);
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; position: relative;
+    }
+    #bg-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    body::after {
+      content: ""; position: fixed; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 30%, rgba(8,12,28,0.72) 100%);
+      z-index: 1; pointer-events: none;
+    }
+    main { position: relative; z-index: 2; width: 100%; max-width: 680px; padding: 24px 20px 80px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .year-badge {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 18px;
+      border-radius: 100px; border: 1px solid rgba(245,197,24,0.35);
+      background: rgba(245,197,24,0.08); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--yellow-soft);
+      backdrop-filter: blur(8px); animation: fadeDown 0.8s ease both;
+    }
+    .year-badge .dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--yellow);
+      box-shadow: 0 0 8px 2px var(--yellow); animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .card {
+      width: 100%; padding: 52px 48px; border-radius: var(--radius);
+      background: rgba(255,255,255,0.055); backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%); border: 1px solid var(--white-border);
+      box-shadow: 0 8px 48px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.09) inset, 0 -1px 0 rgba(0,0,0,0.3) inset;
+      text-align: center; animation: fadeUp 1s ease 0.15s both; position: relative; overflow: hidden;
+    }
+    .card::before {
+      content: ""; position: absolute; inset: 0; border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(255,255,255,0.07) 0%, transparent 50%, rgba(111,207,90,0.05) 100%);
+      pointer-events: none;
+    }
+    .card::after {
+      content: ""; position: absolute; top: 0; left: 10%; right: 10%; height: 2px; border-radius: 2px;
+      background: linear-gradient(90deg, transparent, var(--yellow) 30%, var(--green-light) 70%, transparent);
+      opacity: 0.7;
+    }
+    .flower-wrap { margin-bottom: 28px; display: flex; justify-content: center; }
+    .flower-svg {
+      width: 72px; height: 72px;
+      filter: drop-shadow(0 0 18px rgba(245,197,24,0.6));
+      animation: spin-slow 20s linear infinite, flower-glow 3s ease-in-out infinite alternate;
+    }
+    .greeting-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    .greeting-main {
+      font-family: "Playfair Display", serif; font-size: clamp(2rem,6vw,3.1rem); font-weight: 700; line-height: 1.15;
+      background: linear-gradient(135deg, var(--yellow-soft) 0%, var(--yellow) 40%, var(--green-light) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 6px; letter-spacing: -0.01em;
+    }
+    .greeting-name {
+      font-family: "Playfair Display", serif; font-style: italic;
+      font-size: clamp(1.6rem,5vw,2.5rem); font-weight: 400; color: var(--white);
+      opacity: 0.92; min-height: 1.4em; transition: opacity 0.4s ease;
+    }
+    .name-highlight {
+      background: linear-gradient(90deg, var(--yellow) 0%, var(--green-light) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 700;
+    }
+    .divider { margin: 30px auto; width: 64px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--yellow), var(--green-light)); opacity: 0.5; }
+    .sub-message { font-size: 1.02rem; font-weight: 300; line-height: 1.78; color: rgba(255,255,255,0.72); max-width: 480px; margin: 0 auto; }
+    .sub-message strong { color: rgba(255,255,255,0.9); font-weight: 500; }
+    .wish-chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+    .chip {
+      display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 100px;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em; border: 1px solid;
+      transition: transform 0.2s ease, box-shadow 0.2s ease; cursor: default;
+    }
+    .chip:hover { transform: translateY(-2px); }
+    .chip.health { border-color: rgba(111,207,90,0.4); background: rgba(111,207,90,0.09); color: var(--green-light); }
+    .chip.health:hover { box-shadow: 0 4px 20px rgba(111,207,90,0.25); }
+    .chip.peace { border-color: rgba(245,197,24,0.4); background: rgba(245,197,24,0.09); color: var(--yellow-soft); }
+    .chip.peace:hover { box-shadow: 0 4px 20px rgba(245,197,24,0.25); }
+    .chip.prosperity { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.75); }
+    .chip.prosperity:hover { box-shadow: 0 4px 20px rgba(255,255,255,0.1); }
+    .amharic { margin-top: 36px; font-size: 1.3rem; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; font-weight: 300; }
+    .signature { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.08em; margin-top: 4px; }
+    .test-footer {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 8px 16px; background: rgba(10,15,30,0.85); backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255,255,255,0.07); flex-wrap: wrap;
+    }
+    .test-footer span { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-right: 4px; }
+    .test-link {
+      font-size: 0.68rem; font-weight: 500; padding: 4px 12px; border-radius: 100px;
+      border: 1px solid rgba(245,197,24,0.25); color: var(--yellow-soft);
+      text-decoration: none; background: rgba(245,197,24,0.06);
+      transition: background 0.2s, border-color 0.2s; letter-spacing: 0.04em;
+    }
+    .test-link:hover { background: rgba(245,197,24,0.14); border-color: rgba(245,197,24,0.5); }
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse-dot { 0%, 100% { box-shadow: 0 0 8px 2px rgba(245,197,24,0.8); } 50% { box-shadow: 0 0 14px 5px rgba(245,197,24,0.3); } }
+    @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes flower-glow { from { filter: drop-shadow(0 0 14px rgba(245,197,24,0.5)); } to { filter: drop-shadow(0 0 28px rgba(245,197,24,0.9)); } }
+    @media (max-width: 520px) { .card { padding: 40px 28px; } }
+  </style>
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+  <main>
+    <div class="year-badge"><span class="dot"></span>Ethiopian New Year &nbsp;&middot;&nbsp; 2019 E.C.</div>
+    <div class="card">
+      <div class="flower-wrap">
+        <svg class="flower-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="petalGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#f5c518"/><stop offset="100%" stop-color="#e0a800"/>
+            </radialGradient>
+            <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#1e5c2a"/><stop offset="100%" stop-color="#0d3014"/>
+            </radialGradient>
+          </defs>
+          <g transform="translate(50,50)">
+            <ellipse cx="0" cy="-24" rx="7" ry="16" fill="url(#petalGrad)" transform="rotate(0)"/>
+            <ellipse cx="0" cy="-24" rx="7" ry="16" fill="url(#petalGrad)" transform="rotate(45)"/>
+            <ellipse cx="0" cy="-24" rx="7" ry="16" fill="url(#petalGrad)" transform="rotate(90)"/>
+            <ellipse cx="0" cy="-24" rx="7" ry="16" fill="url(#petalGrad)" transform="rotate(135)"/>
+            <ellipse cx="0" cy="-24" rx="7" ry="16" fill="url(#petalGrad)" transform="rotate(180)"/>
+            <ellipse cx="0" cy="-24" rx="7" ry="16" fill="url(#petalGrad)" transform="rotate(225)"/>
+            <ellipse cx="0" cy="-24" rx="7" ry="16" fill="url(#petalGrad)" transform="rotate(270)"/>
+            <ellipse cx="0" cy="-24" rx="7" ry="16" fill="url(#petalGrad)" transform="rotate(315)"/>
+            <ellipse cx="0" cy="-15" rx="4.5" ry="10" fill="#f0d060" opacity="0.7" transform="rotate(22.5)"/>
+            <ellipse cx="0" cy="-15" rx="4.5" ry="10" fill="#f0d060" opacity="0.7" transform="rotate(67.5)"/>
+            <ellipse cx="0" cy="-15" rx="4.5" ry="10" fill="#f0d060" opacity="0.7" transform="rotate(112.5)"/>
+            <ellipse cx="0" cy="-15" rx="4.5" ry="10" fill="#f0d060" opacity="0.7" transform="rotate(157.5)"/>
+            <ellipse cx="0" cy="-15" rx="4.5" ry="10" fill="#f0d060" opacity="0.7" transform="rotate(202.5)"/>
+            <ellipse cx="0" cy="-15" rx="4.5" ry="10" fill="#f0d060" opacity="0.7" transform="rotate(247.5)"/>
+            <ellipse cx="0" cy="-15" rx="4.5" ry="10" fill="#f0d060" opacity="0.7" transform="rotate(292.5)"/>
+            <ellipse cx="0" cy="-15" rx="4.5" ry="10" fill="#f0d060" opacity="0.7" transform="rotate(337.5)"/>
+            <circle cx="0" cy="0" r="11" fill="url(#centerGrad)"/>
+            <circle cx="0" cy="0" r="7" fill="#2a7a36"/>
+            <circle cx="0" cy="0" r="3" fill="#6fcf5a"/>
+          </g>
+        </svg>
+      </div>
+      <p class="greeting-label">Enkutatash</p>
+      <h1 class="greeting-main">Melkam Addis Amet</h1>
+      <p class="greeting-name" id="greeting-name-line"></p>
+      <div class="divider"></div>
+      <p class="sub-message">
+        As the <strong>Adey Abeba</strong> blooms across the highlands and a fresh
+        Ethiopian year begins, may <strong>2019</strong> bring you overflowing
+        <strong>health</strong>, deep <strong>peace</strong>, and every form of
+        <strong>prosperity</strong> you deserve.
+      </p>
+      <div class="wish-chips">
+        <div class="chip health">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          Health
+        </div>
+        <div class="chip peace">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="22"/><path d="M12 12L4.93 7.5M12 12l7.07-4.5"/></svg>
+          Peace
+        </div>
+        <div class="chip prosperity">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+          Prosperity
+        </div>
+      </div>
+      <p class="amharic">መልካም አዲስ አመት</p>
+      <p class="signature">With love &amp; light &mdash; Enkutatash 2019</p>
+    </div>
+  </main>
+  <footer class="test-footer">
+    <span>&#x1F9EA; Preview:</span>
+    <a class="test-link" href="?name=Selam"   id="link-selam">Selam</a>
+    <a class="test-link" href="?name=Biruk"   id="link-biruk">Biruk</a>
+    <a class="test-link" href="?name=Momi"    id="link-momi">Momi</a>
+    <a class="test-link" href="?name=Gashaye" id="link-gashaye">Gashaye</a>
+    <a class="test-link" href="?name=Babi"    id="link-babi">Babi</a>
+    <a class="test-link" href="?name=Meseret" id="link-meseret">Meseret</a>
+    <a class="test-link" href="?name=Birhane" id="link-birhane">Birhane</a>
+    <a class="test-link" href="?name=Nardos"  id="link-nardos">Nardos</a>
+    <a class="test-link" href="?"             id="link-general">General</a>
+  </footer>
+  <script>
+    /* ── 1. URL PARAM ROUTING ── */
+    (function personalize() {
+      const params = new URLSearchParams(window.location.search);
+      const name   = params.get("name");
+      const line   = document.getElementById("greeting-name-line");
+      if (name && name.trim().length > 0) {
+        const safe = name.trim().replace(/</g,"&lt;").replace(/>/g,"&gt;");
+        line.innerHTML = '<span class="name-highlight">' + safe + '!</span>';
+        document.title = "Melkam Addis Amet, " + safe + "! | Ethiopian New Year 2019";
+      } else {
+        line.innerHTML = '<span style="color:rgba(255,255,255,0.55);font-style:normal;font-size:1rem;letter-spacing:0.06em;">may this year be your best yet</span>';
+      }
+    })();
+
+    /* ── 2. CANVAS ANIMATION ── */
+    (function initCanvas() {
+      const canvas = document.getElementById("bg-canvas");
+      const ctx    = canvas.getContext("2d");
+      let W, H, particles, orbs;
+
+      function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+      const PCOLS = ["rgba(245,197,24,","rgba(240,208,96,","rgba(111,207,90,","rgba(30,92,42,"];
+      const OCOLS = [{r:245,g:197,b:24},{r:111,g:207,b:90},{r:240,g:208,b:96}];
+
+      function makeParticle() {
+        return {
+          x: Math.random()*W, y: Math.random()*H,
+          r: 0.6+Math.random()*1.8, alpha: 0.1+Math.random()*0.55,
+          vx: (Math.random()-0.5)*0.22, vy: -0.08-Math.random()*0.28,
+          color: PCOLS[Math.floor(Math.random()*PCOLS.length)],
+          twinkle: Math.random()*Math.PI*2, twinkleSpeed: 0.012+Math.random()*0.03
+        };
+      }
+      function makeOrb(i) {
+        var c = OCOLS[i % OCOLS.length];
+        return {
+          x: 0.1*W+Math.random()*0.8*W, y: 0.1*H+Math.random()*0.8*H,
+          targetX: 0.1*W+Math.random()*0.8*W, targetY: 0.1*H+Math.random()*0.8*H,
+          r: 80+Math.random()*120, rc: c.r, gc: c.g, bc: c.b,
+          alpha: 0.06+Math.random()*0.08, speed: 0.0008+Math.random()*0.0012, t: Math.random()*Math.PI*2
+        };
+      }
+
+      function init() {
+        resize();
+        var COUNT = Math.min(180, Math.floor((W*H)/7000));
+        particles = Array.from({length:COUNT}, makeParticle);
+        orbs = Array.from({length:5}, function(_,i){return makeOrb(i);});
+      }
+
+      var PETALS = [];
+      setInterval(function(){
+        if(PETALS.length>12) return;
+        PETALS.push({
+          x:Math.random()*W, y:-10, rot:Math.random()*Math.PI*2,
+          rotV:(Math.random()-0.5)*0.03, vx:(Math.random()-0.5)*0.6,
+          vy:0.3+Math.random()*0.5, size:4+Math.random()*8,
+          alpha:0.15+Math.random()*0.25, color:Math.random()>0.5?"#f5c518":"#6fcf5a"
+        });
+      }, 1800);
+
+      function render() {
+        ctx.clearRect(0,0,W,H);
+        var bg = ctx.createLinearGradient(0,0,W,H);
+        bg.addColorStop(0,"#0a0f1e"); bg.addColorStop(0.5,"#0d1530"); bg.addColorStop(1,"#080c1a");
+        ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+
+        /* orbs */
+        orbs.forEach(function(o){
+          o.t += o.speed; o.x += (o.targetX-o.x)*0.004; o.y += (o.targetY-o.y)*0.004;
+          if(Math.abs(o.x-o.targetX)<2 && Math.abs(o.y-o.targetY)<2){
+            o.targetX=0.1*W+Math.random()*0.8*W; o.targetY=0.1*H+Math.random()*0.8*H;
+          }
+          var pulse=1+0.12*Math.sin(o.t);
+          var grad=ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r*pulse);
+          grad.addColorStop(0,"rgba("+o.rc+","+o.gc+","+o.bc+","+o.alpha+")");
+          grad.addColorStop(0.5,"rgba("+o.rc+","+o.gc+","+o.bc+","+(o.alpha*0.4)+")");
+          grad.addColorStop(1,"rgba("+o.rc+","+o.gc+","+o.bc+",0)");
+          ctx.beginPath(); ctx.arc(o.x,o.y,o.r*pulse,0,Math.PI*2); ctx.fillStyle=grad; ctx.fill();
+        });
+
+        /* particles */
+        particles.forEach(function(p){
+          p.x+=p.vx; p.y+=p.vy; p.twinkle+=p.twinkleSpeed;
+          var a=p.alpha*(0.6+0.4*Math.sin(p.twinkle));
+          if(p.y<-4) p.y=H+4; if(p.x<-4) p.x=W+4; if(p.x>W+4) p.x=-4;
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle=p.color+a+")"; ctx.fill();
+        });
+
+        /* petals */
+        for(var i=PETALS.length-1;i>=0;i--){
+          var p=PETALS[i]; p.x+=p.vx; p.y+=p.vy; p.rot+=p.rotV;
+          if(p.y>H+10){PETALS.splice(i,1);continue;}
+          ctx.save(); ctx.globalAlpha=p.alpha; ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+          ctx.beginPath(); ctx.ellipse(0,-p.size*0.6,p.size*0.35,p.size,0,0,Math.PI*2);
+          ctx.fillStyle=p.color; ctx.fill(); ctx.restore();
+        }
+        ctx.globalAlpha=1;
+        requestAnimationFrame(render);
+      }
+
+      window.addEventListener("resize", resize);
+      init(); render();
+    })();
+  </script>
+</body>
+</html>
