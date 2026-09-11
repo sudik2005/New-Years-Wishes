@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -10,311 +10,314 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --yellow:      #d4a017;
-      --yellow-soft: #e8b820;
-      --yellow-pale: #fdf3d0;
-      --green-light: #4aab38;
-      --green-dark:  #1e5c2a;
-      --green-pale:  #e8f5e4;
-      --navy:        #1a2540;
-      --text:        #1c2636;
-      --text-muted:  #7a8494;
-      --border:      #e2e5ea;
-      --bg:          #f7f5f0;
-      --card:        #ffffff;
-    }
-
     body {
       font-family: "Inter", sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      background: #f5f3ee;
+      color: #1c2636;
       padding: 36px 24px 60px;
+      min-height: 100vh;
     }
 
-    /* ── Config bar ── */
-    .config-bar {
-      max-width: 900px;
-      margin: 0 auto 36px;
-      background: var(--card);
-      border-radius: 18px;
-      padding: 28px 32px;
+    /* ── Top header banner ── */
+    .page-header {
+      max-width: 940px;
+      margin: 0 auto 28px;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
       gap: 16px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.07), 0 0 0 1px var(--border);
+      flex-wrap: wrap;
     }
-    .config-bar h1 {
+    .page-title {
       font-family: "Playfair Display", serif;
-      font-size: 1.4rem;
-      color: var(--navy);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1c2636;
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .config-row {
+    .page-title span { font-size: 1.6rem; }
+
+    /* ── Config card ── */
+    .config-bar {
+      max-width: 940px;
+      margin: 0 auto 36px;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px 28px;
       display: flex;
       gap: 12px;
       align-items: center;
       flex-wrap: wrap;
+      border: 1px solid #e0ddd6;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
     }
     .config-label {
-      font-size: 0.73rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: #9aa0ab;
       white-space: nowrap;
     }
     .url-input {
       flex: 1;
-      min-width: 240px;
+      min-width: 220px;
       padding: 10px 16px;
-      border-radius: 8px;
-      border: 1.5px solid var(--border);
-      background: #f9f9f7;
-      color: var(--text);
+      border-radius: 10px;
+      border: 1.5px solid #dddad4;
+      background: #faf9f6;
+      color: #1c2636;
       font-family: "Inter", monospace;
-      font-size: 0.88rem;
+      font-size: 0.87rem;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
     .url-input:focus {
-      border-color: var(--yellow-soft);
-      box-shadow: 0 0 0 3px rgba(232,184,32,0.15);
+      border-color: #d4a017;
+      box-shadow: 0 0 0 3px rgba(212,160,23,0.12);
     }
-    .url-input::placeholder { color: #b0b8c4; }
+    .url-input::placeholder { color: #bbb8b0; }
+
     .btn-generate {
       padding: 10px 22px;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
-      background: linear-gradient(135deg, var(--yellow-soft), var(--green-light));
+      background: linear-gradient(135deg, #e8b820 0%, #4aab38 100%);
       color: #fff;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       cursor: pointer;
-      transition: opacity 0.2s, transform 0.15s;
+      transition: opacity 0.18s, transform 0.15s;
       letter-spacing: 0.02em;
-      box-shadow: 0 2px 8px rgba(74,171,56,0.25);
+      box-shadow: 0 2px 10px rgba(74,171,56,0.22);
     }
-    .btn-generate:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-generate:hover { opacity: 0.88; transform: translateY(-1px); }
+
     .btn-print {
-      padding: 10px 22px;
-      border-radius: 8px;
-      border: 1.5px solid var(--border);
-      background: transparent;
-      color: var(--text-muted);
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1.5px solid #dddad4;
+      background: #ffffff;
+      color: #6b7280;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s;
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
     }
-    .btn-print:hover { background: var(--bg); color: var(--text); }
+    .btn-print:hover { background: #f5f3ee; color: #1c2636; border-color: #c8c5be; }
+
     .status-pill {
-      font-size: 0.72rem;
-      padding: 4px 14px;
+      font-size: 0.71rem;
+      padding: 5px 14px;
       border-radius: 100px;
-      background: var(--green-pale);
-      border: 1px solid rgba(74,171,56,0.3);
-      color: var(--green-dark);
+      background: #e8f5e4;
+      border: 1px solid #a8d9a0;
+      color: #2d7a22;
       display: none;
       font-weight: 600;
+      letter-spacing: 0.04em;
     }
     .status-pill.show { display: inline-block; }
 
-    /* ── Grid ── */
+    /* ── QR Grid ── */
     .grid {
-      max-width: 900px;
+      max-width: 940px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
       gap: 18px;
     }
 
-    /* ── QR card ── */
+    /* ── Individual QR card ── */
     .qr-card {
-      background: var(--card);
-      border-radius: 16px;
-      padding: 24px 18px 20px;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 26px 18px 22px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      border: 1px solid var(--border);
+      gap: 10px;
+      border: 1px solid #e8e5df;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
       transition: transform 0.2s, box-shadow 0.2s;
       position: relative;
       overflow: hidden;
     }
-    .qr-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
+    .qr-card:hover { transform: translateY(-3px); box-shadow: 0 6px 22px rgba(0,0,0,0.09); }
 
+    /* gold-to-green top stripe */
     .qr-card::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--yellow-soft), var(--green-light));
+      height: 4px;
+      background: linear-gradient(90deg, #e8b820 0%, #4aab38 100%);
     }
 
-    .qr-flower { font-size: 1.5rem; line-height: 1; }
+    /* subtle warm tint at bottom */
+    .qr-card::after {
+      content: "";
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40px;
+      background: linear-gradient(to top, #fdf9f0, transparent);
+      pointer-events: none;
+    }
+
+    .qr-flower { font-size: 1.6rem; line-height: 1; margin-top: 4px; }
 
     .qr-name {
       font-family: "Playfair Display", serif;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      color: var(--navy);
+      color: #1a2540;
       text-align: center;
-      line-height: 1.3;
+      line-height: 1.25;
     }
+
     .qr-full-name {
-      font-size: 0.68rem;
-      color: var(--text-muted);
+      font-size: 0.67rem;
+      color: #9aa0ab;
       font-weight: 400;
       text-align: center;
       letter-spacing: 0.02em;
     }
+
     .qr-nick-badge {
-      font-size: 0.62rem;
-      padding: 2px 10px;
+      font-size: 0.63rem;
+      padding: 3px 10px;
       border-radius: 100px;
-      background: var(--yellow-pale);
-      border: 1px solid rgba(212,160,23,0.4);
-      color: var(--yellow);
+      background: #fdf3d0;
+      border: 1px solid #e8c84a;
+      color: #a07010;
       font-weight: 600;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       display: none;
     }
     .qr-nick-badge.show { display: inline-block; }
 
     .qr-box {
-      width: 144px;
-      height: 144px;
+      width: 148px;
+      height: 148px;
       display: flex;
       align-items: center;
       justify-content: center;
       background: #fafaf8;
-      border-radius: 10px;
-      border: 1px solid var(--border);
+      border-radius: 12px;
+      border: 1px solid #e8e5df;
       padding: 8px;
+      margin-top: 4px;
     }
-    .qr-box canvas, .qr-box img { border-radius: 4px; }
+    .qr-box canvas, .qr-box img { border-radius: 6px; display: block; }
 
     .qr-placeholder {
-      width: 128px; height: 128px;
+      width: 132px; height: 132px;
       display: flex; align-items: center; justify-content: center;
-      text-align: center; font-size: 0.68rem; color: #c0c8d0;
-      font-style: italic; line-height: 1.6;
+      text-align: center; font-size: 0.68rem; color: #c8c5be;
+      font-style: italic; line-height: 1.7;
     }
 
     .qr-url-label {
-      font-size: 0.56rem;
-      color: #c0c8d0;
+      font-size: 0.54rem;
+      color: #c0bdb6;
       text-align: center;
       word-break: break-all;
-      max-width: 160px;
+      max-width: 170px;
       line-height: 1.5;
       font-family: monospace;
     }
 
     /* ── Print ── */
     @media print {
-      body { background: #fff; padding: 10mm; }
-      .config-bar { display: none !important; }
-      .grid { max-width: 100%; grid-template-columns: repeat(4, 1fr); gap: 10mm; }
-      .qr-card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; padding: 16px 14px 14px; }
-      .qr-card:hover { transform: none; box-shadow: none; }
-      .qr-box { width: 130px; height: 130px; }
+      body { background: #fff; padding: 8mm; }
+      .config-bar, .page-header { display: none !important; }
+      .grid { max-width: 100%; grid-template-columns: repeat(4, 1fr); gap: 8mm; }
+      .qr-card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; padding: 14px 12px; gap: 8px; }
+      .qr-card:hover { transform: none; }
+      .qr-card::after { display: none; }
+      .qr-box { width: 132px; height: 132px; }
       .qr-url-label { display: none; }
-      @page { margin: 15mm; }
+      @page { margin: 12mm; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
+  <div class="page-header">
+    <div class="page-title"><span>🌼</span> Enkutatash 2019 — QR Code Sheet</div>
+  </div>
+
   <!-- Config bar -->
   <div class="config-bar" id="config-bar">
-    <h1>🌼 Enkutatash 2019 — QR Code Sheet</h1>
-    <div class="config-row">
-      <span class="config-label">Site URL</span>
-      <input
-        class="url-input"
-        id="base-url"
-        type="url"
-        placeholder="https://your-app.vercel.app"
-        value=""
-      />
-      <button class="btn-generate" onclick="generateAll()">Generate QR Codes</button>
-      <button class="btn-print" onclick="window.print()">🖨 Print Sheet</button>
-      <span class="status-pill" id="status-pill">✓ Generated!</span>
-    </div>
+    <span class="config-label">Site URL</span>
+    <input
+      class="url-input"
+      id="base-url"
+      type="url"
+      placeholder="https://your-app.vercel.app"
+      value=""
+    />
+    <button class="btn-generate" onclick="generateAll()">⚡ Generate QR Codes</button>
+    <button class="btn-print" onclick="window.print()">🖨 Print Sheet</button>
+    <span class="status-pill" id="status-pill">✓ All 8 generated!</span>
   </div>
 
   <!-- QR grid -->
   <div class="grid" id="qr-grid"></div>
 
   <script>
-    /* ═══════════════════════════════════════
-       GUEST LIST
-       display  = shown on the card label
-       urlName  = used in ?name= param
-       fullName = printed beneath (family name)
-       nick     = shown as badge if set
-    ═══════════════════════════════════════ */
     const GUESTS = [
-      { display: "Selam",    urlName: "Selam",    fullName: "Selam Meseret",          nick: null },
-      { display: "Biruk",    urlName: "Biruk",    fullName: "Biruk Meseret",          nick: null },
-      { display: "Momi",     urlName: "Momi",     fullName: "Bezaye Meseret",         nick: "Bezaye" },
-      { display: "Gashaye",  urlName: "Gashaye",  fullName: "Gashaye Nuresa",         nick: null },
-      { display: "Babi",     urlName: "Babi",     fullName: "Mintesnot Tadesse",      nick: "Mintesnot" },
-      { display: "Ayate Aba", urlName: "Ayate Aba", fullName: "Meseret Adnew",  nick: "Ayate Aba" },
-      { display: "Ayate Ama", urlName: "Ayate Ama", fullName: "Birhane Agaze",  nick: "Ayate Ama" },
-      { display: "Nardos",   urlName: "Nardos",   fullName: "Nardos Asfeha",          nick: null },
+      { display: "Selam",     urlName: "Selam",     fullName: "Selam Meseret",   nick: null },
+      { display: "Biruk",     urlName: "Biruk",     fullName: "Biruk Meseret",   nick: null },
+      { display: "Momi",      urlName: "Momi",      fullName: "Bezaye Meseret",  nick: "Bezaye" },
+      { display: "Gashaye",   urlName: "Gashaye",   fullName: "Gashaye Nuresa",  nick: null },
+      { display: "Babi",      urlName: "Babi",      fullName: "Mintesnot Tadesse", nick: "Mintesnot" },
+      { display: "Ayate Aba", urlName: "Ayate Aba", fullName: "Meseret Adnew",   nick: "Meseret" },
+      { display: "Ayate Ama", urlName: "Ayate Ama", fullName: "Birhane Agaze",   nick: "Birhane" },
+      { display: "Nardos",    urlName: "Nardos",    fullName: "Nardos Asfeha",   nick: null },
     ];
 
-    /* Build initial empty cards */
     function buildGrid() {
-      const grid = document.getElementById("qr-grid");
+      var grid = document.getElementById("qr-grid");
       grid.innerHTML = "";
       GUESTS.forEach(function(g, i) {
-        const card = document.createElement("div");
+        var card = document.createElement("div");
         card.className = "qr-card";
         card.innerHTML =
           '<div class="qr-flower">🌼</div>' +
           '<div class="qr-name">' + g.display + '</div>' +
-          (g.nick ? '<span class="qr-nick-badge show">' + g.fullName.split(" ")[0] + ' &rsaquo; ' + g.display + '</span>' : '<span class="qr-full-name">' + g.fullName + '</span>') +
+          (g.nick
+            ? '<span class="qr-nick-badge show">' + g.fullName.split(" ")[0] + '</span>'
+            : '<span class="qr-full-name">' + g.fullName + '</span>') +
           '<div class="qr-box" id="qr-box-' + i + '">' +
-            '<div class="qr-placeholder">Enter your<br/>Vercel URL<br/>above</div>' +
+            '<div class="qr-placeholder">Paste your<br/>Vercel URL<br/>above ↑</div>' +
           '</div>' +
           '<div class="qr-url-label" id="qr-url-' + i + '"></div>';
         grid.appendChild(card);
       });
     }
 
-    /* Generate all QR codes */
     function generateAll() {
       var raw = document.getElementById("base-url").value.trim();
       if (!raw) { alert("Please paste your Vercel URL first!"); return; }
-
-      // Normalise: strip trailing slash
       raw = raw.replace(/\/+$/, "");
 
       GUESTS.forEach(function(g, i) {
         var fullUrl = raw + "/?name=" + encodeURIComponent(g.urlName);
-
         var box = document.getElementById("qr-box-" + i);
-        box.innerHTML = "";          // clear placeholder / old QR
-
+        box.innerHTML = "";
         new QRCode(box, {
-          text:         fullUrl,
-          width:        128,
-          height:       128,
-          colorDark:    "#0a0f1e",
-          colorLight:   "#ffffff",
+          text: fullUrl,
+          width: 132,
+          height: 132,
+          colorDark: "#1a2540",
+          colorLight: "#ffffff",
           correctLevel: QRCode.CorrectLevel.H
         });
-
-        var label = document.getElementById("qr-url-" + i);
-        label.textContent = fullUrl;
+        document.getElementById("qr-url-" + i).textContent = fullUrl;
       });
 
       var pill = document.getElementById("status-pill");
@@ -322,7 +325,6 @@
       setTimeout(function(){ pill.classList.remove("show"); }, 3000);
     }
 
-    /* Auto-generate if URL is prefilled from localStorage */
     window.addEventListener("DOMContentLoaded", function() {
       buildGrid();
       var saved = localStorage.getItem("enkutatash_url");
@@ -330,11 +332,6 @@
         document.getElementById("base-url").value = saved;
         generateAll();
       }
-    });
-
-    /* Save URL to localStorage whenever it changes */
-    document.getElementById("base-url") && null; // deferred — element not yet in DOM at parse time
-    window.addEventListener("DOMContentLoaded", function() {
       document.getElementById("base-url").addEventListener("input", function() {
         localStorage.setItem("enkutatash_url", this.value);
       });
