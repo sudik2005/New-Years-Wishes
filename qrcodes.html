@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -11,38 +11,43 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --yellow: #f5c518;
-      --yellow-soft: #f0d060;
-      --green-light: #6fcf5a;
-      --green-dark: #1e5c2a;
-      --navy: #0a0f1e;
-      --card-bg: #0d1530;
+      --yellow:      #d4a017;
+      --yellow-soft: #e8b820;
+      --yellow-pale: #fdf3d0;
+      --green-light: #4aab38;
+      --green-dark:  #1e5c2a;
+      --green-pale:  #e8f5e4;
+      --navy:        #1a2540;
+      --text:        #1c2636;
+      --text-muted:  #7a8494;
+      --border:      #e2e5ea;
+      --bg:          #f7f5f0;
+      --card:        #ffffff;
     }
 
-    /* ── Screen styles ─────────────────────────────── */
     body {
       font-family: "Inter", sans-serif;
-      background: #f0f0ec;
-      color: #1a1a1a;
-      padding: 32px 24px 60px;
+      background: var(--bg);
+      color: var(--text);
+      padding: 36px 24px 60px;
     }
 
-    /* Config bar */
+    /* ── Config bar ── */
     .config-bar {
       max-width: 900px;
-      margin: 0 auto 40px;
-      background: var(--navy);
-      border-radius: 16px;
-      padding: 24px 28px;
+      margin: 0 auto 36px;
+      background: var(--card);
+      border-radius: 18px;
+      padding: 28px 32px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      gap: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07), 0 0 0 1px var(--border);
     }
     .config-bar h1 {
       font-family: "Playfair Display", serif;
-      font-size: 1.35rem;
-      color: var(--yellow-soft);
+      font-size: 1.4rem;
+      color: var(--navy);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -54,11 +59,11 @@
       flex-wrap: wrap;
     }
     .config-label {
-      font-size: 0.75rem;
+      font-size: 0.73rem;
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
+      color: var(--text-muted);
       white-space: nowrap;
     }
     .url-input {
@@ -66,91 +71,92 @@
       min-width: 240px;
       padding: 10px 16px;
       border-radius: 8px;
-      border: 1px solid rgba(245,197,24,0.35);
-      background: rgba(255,255,255,0.06);
-      color: #fff;
+      border: 1.5px solid var(--border);
+      background: #f9f9f7;
+      color: var(--text);
       font-family: "Inter", monospace;
       font-size: 0.88rem;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .url-input:focus { border-color: var(--yellow); }
-    .url-input::placeholder { color: rgba(255,255,255,0.3); }
+    .url-input:focus {
+      border-color: var(--yellow-soft);
+      box-shadow: 0 0 0 3px rgba(232,184,32,0.15);
+    }
+    .url-input::placeholder { color: #b0b8c4; }
     .btn-generate {
       padding: 10px 22px;
       border-radius: 8px;
       border: none;
-      background: linear-gradient(135deg, var(--yellow), var(--green-light));
-      color: #0a0f1e;
+      background: linear-gradient(135deg, var(--yellow-soft), var(--green-light));
+      color: #fff;
       font-weight: 700;
       font-size: 0.85rem;
       cursor: pointer;
       transition: opacity 0.2s, transform 0.15s;
       letter-spacing: 0.02em;
+      box-shadow: 0 2px 8px rgba(74,171,56,0.25);
     }
-    .btn-generate:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-generate:hover { opacity: 0.9; transform: translateY(-1px); }
     .btn-print {
       padding: 10px 22px;
       border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1.5px solid var(--border);
       background: transparent;
-      color: rgba(255,255,255,0.7);
+      color: var(--text-muted);
       font-weight: 600;
       font-size: 0.85rem;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.2s, color 0.2s;
     }
-    .btn-print:hover { background: rgba(255,255,255,0.08); }
+    .btn-print:hover { background: var(--bg); color: var(--text); }
     .status-pill {
       font-size: 0.72rem;
-      padding: 4px 12px;
+      padding: 4px 14px;
       border-radius: 100px;
-      background: rgba(111,207,90,0.14);
-      border: 1px solid rgba(111,207,90,0.3);
-      color: var(--green-light);
+      background: var(--green-pale);
+      border: 1px solid rgba(74,171,56,0.3);
+      color: var(--green-dark);
       display: none;
+      font-weight: 600;
     }
     .status-pill.show { display: inline-block; }
 
-    /* Grid */
+    /* ── Grid ── */
     .grid {
       max-width: 900px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
+      gap: 18px;
     }
 
-    /* Individual QR card */
+    /* ── QR card ── */
     .qr-card {
-      background: #fff;
+      background: var(--card);
       border-radius: 16px;
-      padding: 24px 20px 20px;
+      padding: 24px 18px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.09);
-      border: 1px solid rgba(0,0,0,0.07);
+      gap: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
       transition: transform 0.2s, box-shadow 0.2s;
       position: relative;
       overflow: hidden;
     }
-    .qr-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.14); }
+    .qr-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.1); }
 
-    /* top accent strip */
     .qr-card::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--yellow), var(--green-light));
+      height: 3px;
+      background: linear-gradient(90deg, var(--yellow-soft), var(--green-light));
     }
 
-    .qr-flower {
-      font-size: 1.5rem;
-      line-height: 1;
-    }
+    .qr-flower { font-size: 1.5rem; line-height: 1; }
 
     .qr-name {
       font-family: "Playfair Display", serif;
@@ -161,20 +167,19 @@
       line-height: 1.3;
     }
     .qr-full-name {
-      font-size: 0.7rem;
-      color: #888;
+      font-size: 0.68rem;
+      color: var(--text-muted);
       font-weight: 400;
-      font-family: "Inter", sans-serif;
       text-align: center;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.02em;
     }
     .qr-nick-badge {
-      font-size: 0.64rem;
+      font-size: 0.62rem;
       padding: 2px 10px;
       border-radius: 100px;
-      background: rgba(245,197,24,0.12);
-      border: 1px solid rgba(245,197,24,0.4);
-      color: #b8860b;
+      background: var(--yellow-pale);
+      border: 1px solid rgba(212,160,23,0.4);
+      color: var(--yellow);
       font-weight: 600;
       letter-spacing: 0.05em;
       display: none;
@@ -187,29 +192,23 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f8f8f6;
+      background: #fafaf8;
       border-radius: 10px;
-      border: 1px solid rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
       padding: 8px;
     }
     .qr-box canvas, .qr-box img { border-radius: 4px; }
 
     .qr-placeholder {
-      width: 128px;
-      height: 128px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      font-size: 0.7rem;
-      color: #bbb;
-      font-style: italic;
-      line-height: 1.5;
+      width: 128px; height: 128px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; font-size: 0.68rem; color: #c0c8d0;
+      font-style: italic; line-height: 1.6;
     }
 
     .qr-url-label {
-      font-size: 0.58rem;
-      color: #bbb;
+      font-size: 0.56rem;
+      color: #c0c8d0;
       text-align: center;
       word-break: break-all;
       max-width: 160px;
@@ -217,28 +216,15 @@
       font-family: monospace;
     }
 
-    /* ── PRINT STYLES ─────────────────────────────── */
+    /* ── Print ── */
     @media print {
-      body {
-        background: #fff;
-        padding: 10mm;
-      }
+      body { background: #fff; padding: 10mm; }
       .config-bar { display: none !important; }
-      .grid {
-        max-width: 100%;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10mm;
-      }
-      .qr-card {
-        box-shadow: none;
-        border: 1px solid #ddd;
-        break-inside: avoid;
-        padding: 16px 14px 14px;
-      }
+      .grid { max-width: 100%; grid-template-columns: repeat(4, 1fr); gap: 10mm; }
+      .qr-card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; padding: 16px 14px 14px; }
       .qr-card:hover { transform: none; box-shadow: none; }
       .qr-box { width: 130px; height: 130px; }
       .qr-url-label { display: none; }
-
       @page { margin: 15mm; }
     }
   </style>
@@ -280,8 +266,8 @@
       { display: "Momi",     urlName: "Momi",     fullName: "Bezaye Meseret",         nick: "Bezaye" },
       { display: "Gashaye",  urlName: "Gashaye",  fullName: "Gashaye Nuresa",         nick: null },
       { display: "Babi",     urlName: "Babi",     fullName: "Mintesnot Tadesse",      nick: "Mintesnot" },
-      { display: "Meseret",  urlName: "Meseret",  fullName: "Meseret Adnew (Ayate Aba)", nick: null },
-      { display: "Birhane",  urlName: "Birhane",  fullName: "Birhane Agaze (Ayate Aba)", nick: null },
+      { display: "Ayate Aba", urlName: "Ayate Aba", fullName: "Meseret Adnew",  nick: "Ayate Aba" },
+      { display: "Ayate Ama", urlName: "Ayate Ama", fullName: "Birhane Agaze",  nick: "Ayate Ama" },
       { display: "Nardos",   urlName: "Nardos",   fullName: "Nardos Asfeha",          nick: null },
     ];
 
